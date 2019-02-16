@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+        <link rel="stylesheet" href="../assets/css/style.css"/>
+        <title>{% block title %}{% endblock %} - My WebPage</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% endblock %}
+</head>
+<body>
+<div id="content">{% block content %}
+        <form action="/index.php" method="get" class="registration">
+            <span>MethodName</span><br/>
+            <input name="method" placeholder="channels.history" value="{{ apiMethodName }}"><br/>
+            <input name="advParams[]" placeholder="param1" value="{{ params.param1 }}"><br/>
+            <input name="advParams[]" placeholder="param2" value="{{ params.param2 }}"><br/>
+            <input name="advParams[]" placeholder="param3" value="{{ params.param3 }}"><br/>
+            <input name="advParams[]" placeholder="param4" value="{{ params.param4 }}"><br/>
+            <input name="advParams[]" placeholder="param5" value="{{ params.param5 }}">
+
+            <input type="submit" name="" value="Show" class="registration-button"/>
+        </form>
+        {% if response[0] == true %}
+            <ul class="list-group">
+                {% for item in response %}
+
+                        <li class="list-group-item">{{ i }}
+                            <strong id="item-type">{{ item.message.date|date }}</strong><br/>
+                            {% if item.message.title == true %}{{ item.message.title }}:<br/>{% endif %}
+                            {% if item.message.from.first_name == true %}{{ item.message.from.first_name}}{{  item.message.from.last_name }}:<br/>{% endif %}
+                            <b>{{ item.message.text }}</b><br/>
+
+                            {{ item.message.date }}
+                        </li>
+
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endblock %}</div>
+{#<div id="footer">#}
+{#{% block footer %}#}
+{#&copy; Copyright 2011 by <a href="http://domain.invalid/">Link</a>.#}
+{#{% endblock %}#}
+{#</div>#}
+</body>
+</html>
